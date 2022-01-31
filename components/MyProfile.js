@@ -1,17 +1,18 @@
 import React, { useState }from 'react';
+import { connect } from 'react-redux';
 import styles from '../styles/MyProfile.module.css';
 
-const MyProfile = () => {
+const MyProfile = ({currentUser}) => {
     const [data, setData] = useState({
-      Name: "Amit",
-      Email: "amit@gmail.com",
+      Name: currentUser?.user?.name,
+      Email: currentUser?.user?.email,
       Address: "Kolkata",
-      Mobile: "980123456",
+      Mobile: "",
       Pan:"GSA786",
       Aadhar: "123456789123",
       GSTIN: "BGHASS12346",
     });
-
+    const [showImage, setShowImage] = React.useState("https://i.ibb.co/yNGW4gg/avatar.png");
     const [edit,setEdit] = useState(true);
 
     const { Name, Email, Address,Mobile,Pan,Aadhar,GSTIN} = data;
@@ -35,19 +36,21 @@ const MyProfile = () => {
         <div className={styles.profileContent}>
           <div className={styles.profilePic}>
             <label htmlFor="fileToUpload">
-              <img src="./bxs-camera.svg" className={styles.camera} />
+              <img src="./bxs-camera.svg" style={{cursor:'pointer'}} className={styles.camera} />
               <input
                 type="file"
+                accept='image/*'
                 id="fileToUpload"
+                onChange={(e) => setShowImage(URL.createObjectURL(e.target.files[0]))}
                 style={{ visibility: "hidden" }}
               />
             </label>
             <img
-              src="https://i.ibb.co/yNGW4gg/avatar.png"
+              src={showImage}
               className={styles.image}
               alt="Avatar"
             />
-            <h2>Saurabh Kumar</h2>
+            <h2>{currentUser?.user?.name} <sup style={{fontSize:10, position:'absolute'}}>( {currentUser?.user?.role.toLowerCase()} )</sup> </h2>
           </div>
           <div className={styles.edit}>
             <button
@@ -94,7 +97,7 @@ const MyProfile = () => {
                 required
               />
             </li>
-            <li>
+            {/* <li>
               <b>Address</b>
               <input
                 disabled={edit}
@@ -133,7 +136,7 @@ const MyProfile = () => {
                 value={GSTIN}
                 onChange={changeHandler}
               ></input>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className={styles.btnGroup}>
@@ -217,4 +220,7 @@ const MyProfile = () => {
     );
 }
 
-export default MyProfile
+const mapStateToProps = (state) => ({
+  currentUser : state.user.currentUser
+});
+export default connect(mapStateToProps)(MyProfile)

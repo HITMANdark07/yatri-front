@@ -1,13 +1,15 @@
 import React from 'react';
 import '../styles/globals.css';
 import io from 'socket.io-client';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
+import { store, persistor} from '../redux/store';
 
 function MyApp({ Component, pageProps }) {
-
   const [socket, setSocket] = React.useState(null);
     const setupSocket = () => {
-        var user = localStorage.getItem('user');
+        var user = store.getState()?.user?.currentUser;
         if(user && user.length>0 && !socket){
             const newSocket = io("http://localhost:8000", {
                 query: {
@@ -30,7 +32,11 @@ function MyApp({ Component, pageProps }) {
         setupSocket();
         //eslint-disable-next-line
     },[]);
-  return <Component {...pageProps} />
+  return <Provider store={store} >
+            <PersistGate persistor={persistor}>
+                <Component {...pageProps} />
+            </PersistGate>
+        </Provider>
 }
 
 export default MyApp

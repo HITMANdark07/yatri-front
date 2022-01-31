@@ -1,8 +1,12 @@
 import React,{ useState} from 'react';
+import { connect } from 'react-redux';
 import styles from '../styles/SignUpModal.module.css';
 import SignUpForm from './SignUpForm';
 
 const SignUpModal = ({setOpenModal}) => {
+  const handleClose = () => {
+    setOpenModal(false);
+  }
   const [type, setType] = useState("SignIn");
     return (
       <div className={styles.modalBackground}>
@@ -38,12 +42,15 @@ const SignUpModal = ({setOpenModal}) => {
               </span>
             </div>
             <div>
-              <SignUpForm val={type} />
+              <SignUpForm close={handleClose} val={type} />
             </div>
           </div>
         </div>
       </div>
     );
 }
+const mapStateToProps = (state) => ({
+  currentUser : state.user.currentUser
+});
 
-export default SignUpModal
+export default connect(mapStateToProps)(SignUpModal)
