@@ -1,0 +1,159 @@
+.VehiclesModels{
+   background-blend-mode: overlay;
+    background-color: #191919;
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+}
+.heading{
+    padding-top: 25px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.underline{
+    height: 4px;
+    width: 90px;
+    display: block;
+    background-color: #c61334;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.container{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items:center;
+    width:80%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+@media(max-width:1320px){
+    .container{
+        width:100%;
+    }
+}
+
+@media (max-width:1100px){
+    .container{
+        flex-direction:column;
+    }
+
+}
+
+.Carousel{
+    /* max-width: min-content; */
+    width: 300px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+.carouselButton{
+    width:47%;
+    height: 50%;
+    background-color:rgb(236, 236, 37);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-right: 1.3rem;
+}
+
+.carouselButton:last-child{
+    margin-right: 0;
+}
+.CarButton
+{
+    border:none;
+    background: none;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin: auto;
+    width:100%;
+}
+.CarButton:hover
+{
+    background-color: #c61334 !important;
+}
+.myText
+{
+    display: flex;
+    font-size:2rem;
+    margin:0.3rem;
+    padding:0.2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.CarButton:hover ~ myText{
+    color: #fff !important;
+}
+.images
+{
+    background-color: transparent;
+    display: flex;
+    margin: auto 0.3rem;
+    flex-direction: row;
+    flex: 5;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    animation: wobble 1s 1;
+}
+
+@keyframes wobble {
+    0% {
+      opacity: 0;
+    }
+    25% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    75% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.description{
+    width: 300px;
+    z-index: 1;
+}
+.descriptionHeading
+{
+    background-color: yellow;
+    font-size: x-large;
+    padding:1rem;
+    margin: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+.description ul{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+  }
+.description ul li 
+{
+    font-size: 2rem;
+    margin: 0.6rem;
+    padding: 0.6rem;
+    border-bottom: 1px solid black;
+}
+
+@media (max-width:1100px){
+    .VehiclesModels{
+        display: none;
+    }
+    
+}

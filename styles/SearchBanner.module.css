@@ -1,0 +1,13 @@
+.container h2{
+    font-size: calc(18px + (36 - 18) * ((100vw - 320px) / (1920 - 320)));
+    color: rgb(255, 198, 0);
+    text-transform: uppercase;
+    position: absolute;
+    font-weight: 800;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 16px;
+    margin-top: 15rem;
+    /* margin-left: 20rem; */
+    /* z-index: 5000; */
+}

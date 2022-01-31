@@ -1,0 +1,342 @@
+.row{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) / -2);
+    margin-left: calc(var(--bs-gutter-x) / -2);
+}
+
+.contactDetails{
+    flex: 1;
+    margin-right: 2rem;
+}
+
+@media(max-width: 500px){
+    .contactDetails{
+        margin-right: 0rem;
+    }
+}
+
+.reviewSection .reviewBox {
+    background-color: white;
+    -webkit-box-shadow: 0px 1px 9px 3px rgb(228 228 228 / 81%);
+    box-shadow: 0px 1px 9px 3px rgb(228 228 228 / 81%);
+    margin-bottom: 2rem;
+}
+
+.reviewSection .reviewBox .titleTop {
+    padding: 13px 30px;
+    background-color: #f9f9f9;
+}
+
+.reviewSection .reviewBox .titleTop h5 {
+    margin-bottom: 0;
+    text-transform: capitalize;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 2.5rem;
+    letter-spacing: 0.03rem;
+}
+
+.guestDetail {
+    background-color: white;
+    padding: 20px;
+    -webkit-box-shadow: 0 2px 4px 0 #dedede;
+    box-shadow: 0 2px 4px 0 #dedede;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.NameRow{
+     --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) / -2);
+    margin-left: calc(var(--bs-gutter-x) / -2);
+}
+
+.NameRow .firstName{
+    flex: 0.5;
+    margin-right: 1.5rem;
+    margin-left: 1rem;
+}
+
+.NameRow .lastName{
+    flex: 0.5;
+}
+
+@media(max-width: 500px) {
+    .NameRow{
+        flex-direction: column;
+    }
+
+    .NameRow .firstName{
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+
+    
+}
+
+.guestDetail form label {
+    text-transform: capitalize;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.formControl {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: none;
+    outline: none;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    padding: 10px;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.formText {
+    margin-top: 0.25rem;
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.inputGroup{
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 100%;
+}
+
+.inputGroupText {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 1rem 1rem;
+    margin-left: -1.4rem;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.promoControl{
+    display: block;
+    flex: 1;
+    padding: 0.375rem 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: none;
+    outline: none;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    padding: 10px;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.submitBtn{
+    text-align: right;
+    margin-top: 30px;
+}
+
+.btn{
+    background-color: #e9b30e;
+    color: white;
+    padding: 9px 20px;
+    -webkit-box-shadow: 1px 11px 20px 0px rgb(233 179 14 / 12%);
+    box-shadow: 1px 11px 20px 0px rgb(233 179 14 / 12%);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+.btn:hover{
+    border: 2px solid  #e9b30e;
+    background-color: #fff;
+    color: #e9b30e;
+}
+
+.flightDetail {
+    padding: 20px 30px;
+}
+
+.rowDetails{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) / -2);
+    margin-left: calc(var(--bs-gutter-x) / -2);
+}
+
+.boxes{
+    margin-bottom: 2rem;
+}
+
+.boxes h6{
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+}
+
+.boxes ul{
+    margin-top: 1rem;
+}
+
+.boxes ul li {
+    list-style: none;
+    display: block;
+    text-transform: capitalize;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    margin-bottom: .5rem;
+}
+
+.flightDetail {
+    padding: 20px 20px;
+}
+
+.summeryBox .table {
+    margin-bottom: 0;
+    --bs-table-bg: transparent;
+    --bs-table-striped-color: #212529;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+    --bs-table-active-color: #212529;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-hover-color: #212529;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+
+.table tr td {
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    text-transform: capitalize;
+}
+
+.table tr{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.summeryBox .grandTotal {
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+}
+
+.grandTotal h5 {
+    margin-bottom: 0;
+    text-transform: capitalize;
+    font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    display: flex;
+    justify-content: space-between;
+}
+
+.formGroup label{
+    text-transform: capitalize;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+}
+
+.promos {
+    margin-top: 20px;
+}
+
+.promos .formCheck {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: 0.125rem;
+    margin-bottom: 1.5rem;
+}
+
+.promos .formCheckLabelTitle {
+    font-weight: 700;
+    display: block;
+    font-size: 14px;
+    text-transform: capitalize;
+    letter-spacing: 0.03rem;
+}
+
+.promos .formCheckLabelPara{
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: capitalize;
+}

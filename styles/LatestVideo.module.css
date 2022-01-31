@@ -1,0 +1,302 @@
+.container{
+    /* background-image: url("../public/yellowBg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 20px 10px; */
+
+    background-color: rgb(255, 198, 0);
+    height: auto;
+    width: 100%;
+    padding-bottom: 3rem;
+    padding-top: 5rem;
+}
+
+.container p{
+    font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: 25px;
+    line-height: 1.5;
+    color: #b2b2b2;
+    font-weight: 600;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    color: white;
+}
+
+.ticketBox{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    z-index: 1000;
+    padding: 20px 50px 25px 50px;
+    background-color: #fff;
+    margin-right: -7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.content:before {
+    /*content: "";
+    position: absolute;
+    background-image: url("../public/zig-zag.png");
+    left: -10px;
+    height: 100%;
+    width: 10px;
+    top: 0;
+    -webkit-transform: rotate(180deg;
+    transform: rotate(180deg);
+    -moz-transform: rotate(180deg;
+    -ms-transform: rotate(180deg;
+    -o-transform: rotate(180deg;
+    filter: invert(0.84);
+    */
+    content: "";
+    position: absolute;
+    background-image: url("../public/zig-zag.png");
+    left: -10px;
+    height: 100%;
+    width: 10px;
+    top: 0;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.content:after {
+    /* content: "";
+    position: absolute;
+    background-image: url("../public/zig-zag.png");
+    right: -10px;
+    height: 100%;
+    width: 10px;
+    top: 0;
+    filter: invert(0.84);
+    -webkit-filter: invert(0.84); */
+
+    content: "";
+    position: absolute;
+    background-image: url("../public/zig-zag.png");
+    right: -10px;
+    height: 100%;
+    width: 10px;
+    top: 0;
+}
+
+.detail{
+    max-width: 395px;
+}
+
+.detail h4{
+    font-weight: 800;
+    color: rgba(0, 0, 0, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.detail h4 span{
+   color: #ef3f3e;
+}
+.detail h3{
+    font-weight: 900;
+    color: black;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: 1.5rem;
+}
+
+.detail p{
+    font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: 25px;
+    line-height: 1.5;
+    color: #b2b2b2;
+    font-weight: 600;
+}
+.title{
+    padding-top: 25px;
+    margin-bottom: 0;
+    padding-bottom: 50px;
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.underline{
+    height: 4px;
+    width: 90px;
+    display: block;
+    background-color: #c61334;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.btn{
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    background-color: #ef3f3e;
+    color: white;
+    padding: 9px 20px;
+    -webkit-box-shadow: 1px 11px 20px 0px rgb(239 63 62 / 12%);
+    box-shadow: 1px 11px 20px 0px rgb(239 63 62 / 12%);
+    cursor: pointer;
+}
+
+.barcodeImage{
+   background-color: #fff;
+   padding: 0;
+}
+.imageBox{
+    position: relative;
+    overflow: hidden;
+    -webkit-box-shadow: 5px 8.66px 22px 0px rgb(0 0 0 / 30%);
+    box-shadow: 5px 8.66px 22px 0px rgb(0 0 0 / 30%);
+}
+
+.ticketTitle{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%) rotate(90deg);
+    transform: translateY(-50%) rotate(90deg);
+    right: 2.5%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 1;
+    -moz-transform: translateY(-50%) rotate(90deg);
+    -ms-transform: translateY(-50%) rotate(90deg);
+    -o-transform: translateY(-50%) rotate(90deg);
+}
+
+.ticketTitle h6{
+   background-color: #fff;
+    padding: 10px;
+    font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: 0;
+    text-transform: capitalize;
+    font-weight: 800;
+    color: black;
+}
+
+.ticketTitle span{
+    background-color: red;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+}
+
+
+.imageBox:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    top: 0;
+    z-index: 0;
+}
+.videoIcon{
+    width: 80px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #d62423;
+    -webkit-box-shadow: 2.5px 4.33px 25px 0px rgb(214 36 35 / 60%);
+    box-shadow: 2.5px 4.33px 25px 0px rgb(214 36 35 / 60%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    cursor: pointer;
+}
+
+
+.youtubeImage{
+    width: 0;
+    position: absolute;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-left: 24px solid white;
+    border-bottom: 12px solid transparent;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.videoImg{
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transition: all 0.5s ease;
+}
+
+.imageBox:hover .videoImg{
+    transform: scale(1.04);
+}
+
+@media(max-width:426px){
+    .ticketBox{
+        justify-content: none;
+        flex-direction: column-reverse;
+        align-items: none;
+        position: relative;
+    }
+    .content{
+        width: 250px;
+        padding: 20px 10px;
+        z-index: 1;
+        margin: auto;
+        margin-top: -3rem;
+    }
+
+    .videoImg{
+        width: 300px;
+        height: auto;
+    }
+
+    .barcodeImage{
+        display: none;
+    }
+
+    .ticketTitle{
+        transform: none;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        position: absolute;
+        top: -30px;
+        right: 18%;
+    }
+
+    .btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        margin: auto;
+    }
+}

@@ -1,0 +1,59 @@
+.container{
+  width: 70%;
+  min-width:27rem;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.starContainer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+}
+
+.star{
+    height: 2.5rem;
+    width: 2.5rem;
+    object-fit: contain;
+}
+
+.bigStar{
+  height: 4rem;
+  width: 4rem;
+  object-fit: contain;
+}
+
+.para{
+    font-size: 24px;
+    color: #716d6e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.name{
+    color: #c61334;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media(max-width:768px){
+  .para{
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+}
+
+@media(max-width:425px){
+  .para{
+    font-size: 16px;
+    line-height: 1;
+  }
+
+}

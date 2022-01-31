@@ -1,0 +1,74 @@
+.container{
+    width: 100%;
+    margin-top: 2rem;
+    margin-right: 15px;
+}
+
+.heading{
+  color: #716d6e;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+.underline{
+    height: 4px;
+    width: 135px;
+    display: block;
+    background-color: #c61334;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.CardWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  margin-right: 15px;
+}
+
+.content{
+    background-color: #ededed;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-width: 300px;
+    max-width: 400px;
+    margin-left: 2rem;
+    min-width: 27rem;
+}
+
+.header{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.icon{
+    height: 38px;
+    width: 38px;
+    line-height: 37px;
+    font-size: 36px;
+    height: 43px;
+    width: 43px;
+    background-color: #c61334;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    font-size: 41px;
+    font-weight: 900;
+    float: left;
+    margin-right: 15px;
+}
+
+.title{
+    font-size: 24px;
+    color: #716d6e
+}
+
+.para{
+    color: #716d6e;
+    font-size: 16px;
+}

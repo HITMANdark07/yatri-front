@@ -1,0 +1,137 @@
+.container{
+    background-blend-mode: overlay;
+    background-color: white;
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+
+    /* background-image: url("../public/grey-bg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 20px 10px; */
+}
+
+.title{
+    padding-top: 25px;
+    margin-bottom: 2rem;
+    /* padding-bottom: 50px; */
+    font-weight: 800;
+    color: black;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.underline{
+    height: 4px;
+    width: 90px;
+    display: block;
+    background-color: rgb(255, 198, 0);
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageSection{
+    display: flex;
+    margin-left: 2rem;
+}
+
+.imgBox{
+    margin: 2rem;
+    position: relative;
+}
+
+.noClass{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: rgb(255, 198, 0);
+    padding: 5px;
+    left: -15px;
+    -webkit-box-shadow: 2.5px 4.33px 25px 0px rgb(239 63 62 / 40%);
+    box-shadow: 2.5px 4.33px 25px 0px rgb(239 63 62 / 40%);
+}
+
+.noClass h3{
+    font-size: calc(14px + (24 - 14) * ((100vw - 320px) / (1920 - 320)));
+    color: white;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+.aboutText{
+    justify-self: flex-start;
+    height: 100%;
+    padding-left: 60px;
+    padding-top: 2rem;
+    padding-right: 2rem;
+}
+
+.aboutText h5 {
+    font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
+    font-style: italic;
+    color: #adadad;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: -2px;
+    letter-spacing: .2rem;
+}
+
+.aboutText h5 span {
+    color: rgb(255, 198, 0);
+    margin-right: .3rem;
+}
+
+.aboutText h3 {
+    font-size: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+    text-transform: capitalize;
+    font-weight: 800;
+    letter-spacing: 0.001em;
+    margin-bottom: 35px;
+    color: black;
+}
+
+.aboutText h2 {
+    font-size: calc(18px + (45 - 18) * ((100vw - 320px) / (1920 - 320)));
+    color: rgb(255, 198, 0);
+    font-weight: 800;
+    margin-bottom: 35px;
+}
+
+ .aboutText p {
+    font-size: calc(14px + (22 - 14) * ((100vw - 320px) / (1920 - 320)));
+    color: #adadad;
+    letter-spacing: 0.06em;
+    text-align: left;
+    line-height: 1.5;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.btn{
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    background-color: rgb(255, 198, 0);
+    color: white;
+    padding: 9px 20px;
+    -webkit-box-shadow: 1px 11px 20px 0px rgb(239 63 62 / 12%);
+    box-shadow: 1px 11px 20px 0px rgb(239 63 62 / 12%);
+    cursor: pointer;
+}
