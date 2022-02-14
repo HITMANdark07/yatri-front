@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {useRouter} from "next/router";
 import styles from "../styles/Banner.module.css";
+import axios from "axios";
 
 const BookingForm = ({val}) => {
   const router = useRouter();
@@ -9,10 +10,27 @@ const BookingForm = ({val}) => {
       destination: "Kolkata",
       date: "2020-12-15",
       time: "10:15",
-      tripType: val
+      trip_type: val
     });
+    const [locations, setLocations] = useState([]);
+
+    const getLocs = () => {
+      axios({
+        method:'GET',
+        url:`${process.env.API}/location/list`
+      }).then((res) => {
+        setLocations(res.data);
+        setValues((state) => ({
+          ...state,
+          start:res.data[0]._id,
+          destination:res.data[0]._id
+        }))
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
     
-    const { start, destination, date,time, tripType } = values;
+    const { start, destination, date,time, trip_type } = values;
     const handleStartChange = (e) => {
       e.persist();
       setValues((values) => ({
@@ -55,10 +73,14 @@ const BookingForm = ({val}) => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      router.push(`/car-search/?start=${start}&destination=${destination}&date=${date}&time=${time}&tripType=${val}`);
+      router.push(`/car-search/?start=${start}&destination=${destination}&date=${date}&time=${time}&trip_type=${val}`);
     };
 
-    if(val=="Outstation"){
+    React.useEffect(() => {
+      getLocs();
+    },[]);
+
+    if(val=="OUTSTATION"){
         return (
           <div>
             <form onSubmit={handleSubmit}>
@@ -73,10 +95,17 @@ const BookingForm = ({val}) => {
                       value={values.start}
                       onChange={handleStartChange}
                     >
-                      <option value="volvo">Banglore</option>
+                      {
+                        locations.map((loc) => (
+                          <>
+                          <option key={loc._id} value={loc._id}>{loc.name}</option>
+                          </>
+                        ))
+                      }
+                      {/* <option value="volvo">Banglore</option>
                       <option value="saab">Kolkata</option>
                       <option value="mercedes">New delhi</option>
-                      <option value="audi">Lucknow</option>
+                      <option value="audi">Lucknow</option> */}
                     </select>
                   </div>
                 </li>
@@ -90,10 +119,13 @@ const BookingForm = ({val}) => {
                       value={values.destination}
                       onChange={handleDestinationChange}
                     >
-                      <option value="volvo">Banglore</option>
-                      <option value="saab">Kolkata</option>
-                      <option value="mercedes">New delhi</option>
-                      <option value="audi">Lucknow</option>
+                      {
+                        locations.map((loc) => (
+                          <>
+                          <option key={loc._id} value={loc._id}>{loc.name}</option>
+                          </>
+                        ))
+                      }
                     </select>
                   </div>
                 </li>
@@ -136,11 +168,14 @@ const BookingForm = ({val}) => {
         );
     }
 
-    else if(val=="Local"){
+    else if(val=="LOCAL"){
 
         return (
           <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              router.push(`/car-search/?start=${start}&destination=&date=${date}&time=${time}&trip_type=${val}`);
+            }}>
               <ul className={styles.bookingWidgetForm}>
                 <li>
                   <label className={styles.label} htmlFor="start">
@@ -152,10 +187,13 @@ const BookingForm = ({val}) => {
                       value={values.destination}
                       onChange={handleDestinationChange}
                     >
-                      <option value="volvo">Banglore</option>
-                      <option value="saab">Kolkata</option>
-                      <option value="mercedes">New delhi</option>
-                      <option value="audi">Lucknow</option>
+                      {
+                        locations.map((loc) => (
+                          <>
+                          <option key={loc._id} value={loc._id}>{loc.name}</option>
+                          </>
+                        ))
+                      }
                     </select>
                   </div>
                 </li>
@@ -213,10 +251,13 @@ const BookingForm = ({val}) => {
                       value={values.destination}
                       onChange={handleDestinationChange}
                     >
-                      <option value="volvo">Banglore</option>
-                      <option value="saab">Kolkata</option>
-                      <option value="mercedes">New delhi</option>
-                      <option value="audi">Lucknow</option>
+                      {
+                        locations.map((loc) => (
+                          <>
+                          <option key={loc._id} value={loc._id}>{loc.name}</option>
+                          </>
+                        ))
+                      }
                     </select>
                   </div>
                 </li>
@@ -230,9 +271,8 @@ const BookingForm = ({val}) => {
                       value={values.tripType}
                       onChange={handleTripChange}
                     >
-                      <option value="volvo">Select trip type</option>
-                      <option value="volvo">Cab from Airport</option>
-                      <option value="saab">Cab to Airport</option>
+                      <option value="CAB_FROM_AIRPORT">CAB FROM AIRPORT</option>
+                      <option value="CAB_TO_AIRPORT">CAB TO AIRPORT</option>
                     </select>
                   </div>
                 </li>
@@ -246,10 +286,13 @@ const BookingForm = ({val}) => {
                       value={values.start}
                       onChange={handleStartChange}
                     >
-                      <option value="volvo">Banglore</option>
-                      <option value="saab">Kolkata</option>
-                      <option value="mercedes">New delhi</option>
-                      <option value="audi">Lucknow</option>
+                      {
+                        locations.map((loc) => (
+                          <>
+                          <option key={loc._id} value={loc._id}>{loc.name}</option>
+                          </>
+                        ))
+                      }
                     </select>
                   </div>
                 </li>

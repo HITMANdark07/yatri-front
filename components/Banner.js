@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import BookingForm from "./BookingForm";
 
 const Banner = () => {
-  const [rideType, setRideType] = useState("Outstation");
+  const [rideType, setRideType] = useState("OUTSTATION");
 
   return (
     <div className={styles.container}>
@@ -15,29 +15,29 @@ const Banner = () => {
           <span
             className={[
               styles.rideType,
-              rideType === "Outstation" ? styles.active : {},
+              rideType === "OUTSTATION" ? styles.active : {},
             ].join(" ")}
-            onClick={() => setRideType("Outstation")}
+            onClick={() => setRideType("OUTSTATION")}
           >
-            Outstation
+            OUTSTATION
           </span>
           <span
             className={[
               styles.rideType,
-              rideType === "Local" ? styles.active : {},
+              rideType === "LOCAL" ? styles.active : {},
             ].join(" ")}
-            onClick={() => setRideType("Local")}
+            onClick={() => setRideType("LOCAL")}
           >
-            Local
+            LOCAL
           </span>
           <span
             className={[
               styles.rideType,
-              rideType === "Airport" ? styles.active : {},
+              rideType === "AIRPORT" ? styles.active : {},
             ].join(" ")}
-            onClick={() => setRideType("Airport")}
+            onClick={() => setRideType("AIRPORT")}
           >
-            Airport
+            AIRPORT
           </span>
         </div>
         <div>
