@@ -10,9 +10,10 @@ const BookingForm = ({val}) => {
       destination: "Kolkata",
       date: "2020-12-15",
       time: "10:15",
-      trip_type: val
+      trip_type: val,
     });
     const [locations, setLocations] = useState([]);
+    const [subTrip, setSubTrip] = useState("");
 
     const getLocs = () => {
       axios({
@@ -39,12 +40,25 @@ const BookingForm = ({val}) => {
       }));
     };
 
-    const handleTripChange = (e) => {
+    React.useEffect(() => {
+      switch (val){
+        case 'LOCAL':
+          setSubTrip("8HRS/80KM");
+          break;
+        case 'OUTSTATION':
+          setSubTrip("ONEWAY");
+          break;
+        case 'AIRPORT':
+          setSubTrip("CAB_FROM_AIRPORT");
+          break;
+        default:
+          setSubTrip("8HRS/80KM");
+      }
+    },[val]);
+    // console.log(subTrip,val);
+    const handleSubTripChange = (e) => {
       e.persist();
-      setValues((values) => ({
-        ...values,
-        tripType: e.target.value,
-      }));
+      setSubTrip(e.target.value);
     };
 
     const handleDestinationChange = (e) => {
@@ -71,10 +85,6 @@ const BookingForm = ({val}) => {
       }));
     };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      router.push(`/car-search/?start=${start}&destination=${destination}&date=${date}&time=${time}&trip_type=${val}`);
-    };
 
     React.useEffect(() => {
       getLocs();
@@ -83,7 +93,10 @@ const BookingForm = ({val}) => {
     if(val=="OUTSTATION"){
         return (
           <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              router.push(`/car-search/?start=${start}&destination=${destination}&date=${date}&time=${time}&trip_type=${val}&sub_trip=${subTrip}`);
+            }}>
               <ul className={styles.bookingWidgetForm}>
                 <li>
                   <label className={styles.label} htmlFor="start">
@@ -126,6 +139,21 @@ const BookingForm = ({val}) => {
                           </>
                         ))
                       }
+                    </select>
+                  </div>
+                </li>
+                <li>
+                  <label className={styles.label} htmlFor="tripType">
+                    Trip type
+                  </label>
+                  <div className={styles.formField}>
+                    <select
+                      id="tripType"
+                      value={subTrip}
+                      onChange={handleSubTripChange}
+                    >
+                      <option value="ONEWAY">ONEWAY</option>
+                      <option value="ROUND_TRIP">ROUND TRIP</option>
                     </select>
                   </div>
                 </li>
@@ -239,7 +267,10 @@ const BookingForm = ({val}) => {
     {
         return (
           <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              router.push(`/car-search/?start=${start}&destination=${destination}&date=${date}&time=${time}&trip_type=${val}&sub_trip=${subTrip}`);
+            }}>
               <ul className={styles.bookingWidgetForm}>
                 <li>
                   <label className={styles.label} htmlFor="start">
@@ -248,8 +279,8 @@ const BookingForm = ({val}) => {
                   <div className={styles.formField}>
                     <select
                       id="start"
-                      value={values.destination}
-                      onChange={handleDestinationChange}
+                      value={values.start}
+                      onChange={handleStartChange}
                     >
                       {
                         locations.map((loc) => (
@@ -268,8 +299,8 @@ const BookingForm = ({val}) => {
                   <div className={styles.formField}>
                     <select
                       id="tripType"
-                      value={values.tripType}
-                      onChange={handleTripChange}
+                      value={subTrip}
+                      onChange={handleSubTripChange}
                     >
                       <option value="CAB_FROM_AIRPORT">CAB FROM AIRPORT</option>
                       <option value="CAB_TO_AIRPORT">CAB TO AIRPORT</option>
