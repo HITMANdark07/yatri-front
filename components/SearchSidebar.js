@@ -1,4 +1,5 @@
 import React,{ useState} from 'react';
+import {useRouter} from 'next/router';
 import styles from '../styles/SearchSidebar.module.css';
 import VehicalDetails from './VehicalDetails';
 
@@ -146,7 +147,115 @@ const categories = [
 ];
 
 const SearchSidebar = () => {
+  const router = useRouter();
+  const trip = router.query.trip_type;
+
   const [showCategory, setShowCategory] = useState(false);
+  const [distance, setDistance] = useState();
+  const [active, setActive] = useState(true);
+  const [val, setVal] = useState('8HRS/80KM');
+  
+  const handleClick = (e) => {
+    setVal(e.target.value);
+    //setRightActive(!rightActive)
+  }
+  React.useEffect(() => {
+    switch (trip) {
+      case 'LOCAL':
+        setVal("8HRS/80KM");
+        break;
+      case 'OUTSTATION':
+        setVal("ONEWAY");
+        break;
+      case 'AIRPORT':
+        setVal("CAB_FROM_AIRPORT");
+        break;
+      default:
+        setVal("8HRS/80KM");
+    }
+  },[trip]);
+
+  console.log(val,active);
+
+  const showMenu = () => {
+    if(trip==='LOCAL'){
+      console.log(val === "8HRS/80KM");
+      return (
+        <div className={styles.btnGroup}>
+          <button
+            style={{
+              backgroundColor: val === "8HRS/80KM" ? "#e9b30e" : "",
+              color: val === "8HRS/80KM" ? "#fff" : "",
+            }}
+            onClick={handleClick}
+            value="8HRS/80KM"
+          >
+            8hr | 80km
+          </button>
+          <button
+            style={{
+              backgroundColor: val === "12HRS/120KM" ? "#e9b30e" : "",
+              color: val === "12HRS/120KM" ? "#fff" : "",
+            }}
+            onClick={handleClick}
+            value="12HRS/120KM"
+          >
+            12hr | 120km
+          </button>
+        </div>
+      );
+    }else if(trip==='OUTSTATION'){
+      return (
+        <div className={styles.btnGroup}>
+          <button
+            style={{
+              backgroundColor: val === "ONEWAY" ? "#e9b30e" : "",
+              color: val === "ONEWAY" ? "#fff" : "",
+            }}
+            onClick={handleClick}
+            value="ONEWAY"
+          >
+            ONEWAY
+          </button>
+          <button
+            style={{
+              backgroundColor: val === "ROUND_TRIP" ? "#e9b30e" : "",
+              color: val === "ROUND_TRIP" ? "#fff" : "",
+            }}
+            onClick={handleClick}
+            value="ROUND_TRIP"
+          >
+            ROUND TRIP
+          </button>
+        </div>
+      );
+    }else{
+      return (
+        <div className={styles.btnGroup}>
+          <button
+            style={{
+              backgroundColor: val === "CAB_FROM_AIRPORT" ? "#e9b30e" : "",
+              color: val === "CAB_FROM_AIRPORT" ? "#fff" : "",
+            }}
+            onClick={handleClick}
+            value="CAB_FROM_AIRPORT"
+          >
+            CAB FROM AIRPORT
+          </button>
+          <button
+            style={{
+              backgroundColor: val === "CAB_TO_AIRPORT" ? "#e9b30e" : "",
+              color: val === "CAB_TO_AIRPORT" ? "#fff" : "",
+            }}
+            onClick={handleClick}
+            value="CAB_TO_AIRPORT"
+          >
+            CAB TO AIRPORT
+          </button>
+        </div>
+      );
+    }
+  }
     return (
       <div className={styles.container}>
         {/* <div className={styles.sidebar}>
@@ -201,9 +310,12 @@ const SearchSidebar = () => {
           </div>
         </div> */}
         <div className={styles.body}>
-          {carsData.map((car) => {
-            return <VehicalDetails key={car.id} {...car} />;
-          })}
+          {showMenu()}
+          <div className={styles.vehiclesGroup}>
+            {carsData.map((car) => {
+              return <VehicalDetails key={car.id} {...car} />;
+            })}
+          </div>
         </div>
       </div>
     );
