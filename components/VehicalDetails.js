@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from "next/router";
 import styles from '../styles/VehicalDetails.module.css';
 
-const VehicalDetails = ({Name,type,seats,ac,price,luggage,start,Fare,TotalFare,image}) => {
+const VehicalDetails = ({Name,type,seats,ac,price,luggage,start,Fare,TotalFare,gst,image}) => {
   const [details, setDetails] = useState(false);
   const [description,setDescription] = useState("INCLUSION")
   const router = useRouter();
@@ -32,7 +32,7 @@ const VehicalDetails = ({Name,type,seats,ac,price,luggage,start,Fare,TotalFare,i
           </li>
           <li>
             <img src="./inclusions_icon3.png" />
-            <h6>GST (5%)</h6>
+            <h6>GST ({gst}%)</h6>
           </li>
         </ul>
       );
@@ -41,7 +41,7 @@ const VehicalDetails = ({Name,type,seats,ac,price,luggage,start,Fare,TotalFare,i
         <ul>
           <li>
             <img src="./exclusions_icon1.png" />
-            <h6>Pay ₹11/km after 80 km</h6>
+            <h6>Pay ₹{Fare}/km after 80 km</h6>
           </li>
           <li>
             <img src="./inclusions_icon1.png" />
@@ -62,15 +62,15 @@ const VehicalDetails = ({Name,type,seats,ac,price,luggage,start,Fare,TotalFare,i
         <ul>
           <li>
             <img src="./facilities_icon1.png" />
-            <h6>4 seater</h6>
+            <h6>{seats} seater</h6>
           </li>
           <li>
             <img src="./facilities_icon2.png" />
-            <h6>2 bags</h6>
+            <h6>{luggage} bags</h6>
           </li>
           <li>
             <img src="./facilities_icon3.png" />
-            <h6>AC</h6>
+            <h6>{ac ? "AC" : "NON_AC"}</h6>
           </li>
         </ul>
       );
@@ -189,9 +189,9 @@ const VehicalDetails = ({Name,type,seats,ac,price,luggage,start,Fare,TotalFare,i
             <div className={styles.col}>
               <div className={styles.price}>
                 <div>
-                  <h4>{TotalFare}</h4>
+                  <h4>₹{TotalFare}/-</h4>
                   <h6>
-                    fare/km : <span>{Fare}</span>
+                    fare/km : <span>₹{Fare}/-</span>
                   </h6>
                 </div>
               </div>

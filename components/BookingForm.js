@@ -184,8 +184,8 @@ const BookingForm = ({val}) => {
                   <div className={styles.formField}>
                     <select
                       id="start"
-                      value={values.destination}
-                      onChange={handleDestinationChange}
+                      value={values.start}
+                      onChange={handleStartChange}
                     >
                       {
                         locations.map((loc) => (
