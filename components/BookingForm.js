@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import {useRouter} from "next/router";
 import styles from "../styles/Banner.module.css";
 import axios from "axios";
+import moment from 'moment';
 
 const BookingForm = ({val}) => {
   const router = useRouter();
     const [values, setValues] = useState({
       start: "Banglore",
       destination: "Kolkata",
-      date: "2020-12-15",
-      time: "10:15",
+      date: moment().format('YYYY-MM-DD'),
+      time: moment().format('HH:mm'),
       trip_type: val,
     });
+    console.log();
     const [locations, setLocations] = useState([]);
     const [subTrip, setSubTrip] = useState("");
 
