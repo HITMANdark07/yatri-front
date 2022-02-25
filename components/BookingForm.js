@@ -26,7 +26,7 @@ const BookingForm = ({val}) => {
         setValues((state) => ({
           ...state,
           start:res.data[0]._id,
-          destination:res.data[0]._id
+          destination:res.data[1]._id
         }))
       }).catch((err) => {
         console.log(err);
@@ -204,7 +204,7 @@ const BookingForm = ({val}) => {
           <div>
             <form onSubmit={(e) => {
               e.preventDefault();
-              router.push(`/car-search/?start=${start}&destination=&date=${date}&time=${time}&trip_type=${val}`);
+              router.push(`/car-search/?start=${start}&destination=${start}&date=${date}&time=${time}&trip_type=${val}`);
             }}>
               <ul className={styles.bookingWidgetForm}>
                 <li>

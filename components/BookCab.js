@@ -1,8 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import styles from '../styles/BookCab.module.css';
 import ContactDetails from './ContactDetails';
+import Skeleton from '@mui/material/Skeleton';
+import moment from 'moment';
 
 const BookCab = () => {
+
+  const router = useRouter();
+  const destination = router.query.destination;
+  const tariffId = router.query.tariff;
+  console.log(tariffId, destination);
+  const [loading, setLoading] = useState(true);
+  const [distance, setDistance] = useState("");
+  const [gst,setGst] = useState(0);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [car, setCar] = useState("");
+  const [estimatedCost, setEstimatedCost] = useState(0);
+  React.useEffect(() => {
+    if(tariffId && destination){
+      setLoading(true);
+      axios({
+        method:'POST',
+        url:`${process.env.API}/calculate/charges`,
+        data:{
+          tariffId,
+          destination
+        }
+      }).then((response) => {
+        setLoading(false);
+        setGst(response.data.gst);
+        setCar(response.data.car);
+        setEstimatedCost(response.data.estimated_cost);
+        if(response.data.distance) setDistance(response.data.distance);
+        if(response.data.from) setFrom(response.data.from);
+        if(response.data.to) setTo(response.data.to);
+      }).catch((err) => {
+        console.log(err);
+        setLoading(false);
+      })
+    }
+  },[tariffId, destination]);
     return (
       <div className={styles.container}>
         <div className={styles.row}>
@@ -61,28 +101,76 @@ const BookCab = () => {
                   <div className={styles.summeryBox}>
                     <table className={styles.table}>
                       <tbody>
-                        <tr>
-                          <td>Itinerary :</td>
-                          <td>Paris to Toulouse</td>
-                        </tr>
+                        {
+                          router.query.trip_type==="OUTSTATION" &&
+                          <>
+                          <tr>
+                          <td>From: {from}</td>
+                          <td style={{fontSize:25}}>
+                          ➠
+                          </td>
+                          <td>To: {to}</td>
+                          </tr>
+                          {
+                            loading && 
+                            <tr>
+                            <td><Skeleton animation="wave" width={150} /></td>
+                            
+                            <td><Skeleton animation="wave" width={150} /></td>
+                            </tr>
+                          }
+                          <tr>
+                          <td>Approx Distance :</td>
+                          {loading ?
+                          <Skeleton animation="wave" width={150} />
+                          :
+                          <td>{distance}</td>
+                          }
+                          </tr>
+                          </>
+                        }
                         <tr>
                           <td>pickup date:</td>
-                          <td>10/01/2019, 11.35pm</td>
+                          <td>{moment(new Date(router.query.date)).format("DD/MM/YYYY")}, {router.query.time} { router.query.time &&  router.query.time.split(":")[0]>=12 ? "PM" :"AM"}</td>
                         </tr>
                         <tr>
                           <td>return date:</td>
-                          <td>14/01/2019</td>
+                          <td>{moment(new Date(router.query.date)).format("DD/MM/YYYY")}</td>
                         </tr>
                         <tr>
                           <td>car type</td>
-                          <td>Fiat Chrysler</td>
+                          {
+                            loading ?
+                            <Skeleton animation="wave" width={150} />
+                            :
+                            <td>{car}</td>
+                          }
+                        </tr>
+                        <tr>
+                          <td>GST ( {(+gst*100/(+estimatedCost)).toFixed(1)}% ) :</td>
+                          <td>{gst && '₹'+gst+'/-'}</td>
+                        </tr>
+                        <tr>
+                          <td>Estimated fare :</td>
+                          {
+                            loading ?
+                            <Skeleton animation="wave" width={150} />
+                            :
+                            <td>{'₹'+estimatedCost+'/-'}</td>
+                          }
+                          
                         </tr>
                       </tbody>
                     </table>
                     <div className={styles.grandTotal}>
                       <h5>
-                        <span>total fare:</span>
-                        <span>$1250</span>
+                        <span>total estimated fare:</span>
+                        {
+                            loading ?
+                            <Skeleton animation="wave" height={30} width={150} />
+                            :
+                            <span>₹{Number(estimatedCost)+Number(gst)}/-</span>
+                          }
                       </h5>
                     </div>
                   </div>
@@ -116,7 +204,6 @@ const BookCab = () => {
                             name="radiobtn"
                             id="exampleRadios3"
                             value="option1"
-                            checked
                           />
                           <div>
                             <label

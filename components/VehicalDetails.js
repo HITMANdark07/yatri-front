@@ -3,17 +3,17 @@ import React, { useState } from 'react';
 import { useRouter } from "next/router";
 import styles from '../styles/VehicalDetails.module.css';
 
-const VehicalDetails = ({Name,type,seats,ac,price,luggage,start,Fare,TotalFare,gst,image}) => {
+const VehicalDetails = ({id,per,Name,type,seats,ac,price,luggage,start,Fare,TotalFare,gst,image}) => {
   const [details, setDetails] = useState(false);
   const [description,setDescription] = useState("INCLUSION")
   const router = useRouter();
   const bookCab = (e) => {
     e.preventDefault();
     router.push(
-      `/book-cab`
+      `/book-cab/${router.asPath.replace(router.pathname,"")}&tariff=${id}`
     );
   };
-
+  
   const openDialog = () =>{
      setDetails(!details);
   }
@@ -188,12 +188,22 @@ const VehicalDetails = ({Name,type,seats,ac,price,luggage,start,Fare,TotalFare,g
             </div>
             <div className={styles.col}>
               <div className={styles.price}>
-                <div>
-                  <h4>₹{TotalFare}/-</h4>
+                {
+                  (router.query.trip_type=== "LOCAL" || router.query.trip_type==="AIRPORT") ?
+                  (<div>
+                  <h4>Base Fare: ₹{TotalFare}/-</h4>
                   <h6>
-                    fare/km : <span>₹{Fare}/-</span>
+                    fare/km: <span>₹{Fare}/-</span>
                   </h6>
-                </div>
+                </div>)
+                :
+                (<div>
+                  <h4>fare/km: ₹{per}/-</h4>
+                  {/* <h6>
+                    : <span>₹{Fare}/-</span>
+                  </h6> */}
+                </div>)
+                }
               </div>
             </div>
             <div className={styles.col}>

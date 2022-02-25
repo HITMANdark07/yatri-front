@@ -3,117 +3,7 @@ import {useRouter} from 'next/router';
 import styles from '../styles/SearchSidebar.module.css';
 import VehicalDetails from './VehicalDetails';
 import axios from 'axios';
-
-const carsData = [
-  {
-    id: 1,
-    Name: "Peugeot Citroen",
-    type: "Prime",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    Fare: "$25",
-    TotalFare: "$1200",
-    image: "./10.png",
-  },
-  {
-    id: 2,
-    Name: "Suzuki",
-    type: "Medium",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    Fare: "$25",
-    TotalFare: "$1200",
-    image: "./6.png",
-  },
-  {
-    id: 3,
-    Name: "Fiat Chrysler",
-    type: "Mini",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    Fare: "$25",
-    TotalFare: "$1200",
-    image: "./3.png",
-  },
-  {
-    id: 4,
-    Name: "Honda",
-    type: "Standard",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    Fare: "$25",
-    TotalFare: "$1200",
-    image: "./6.png",
-  },
-  {
-    id: 5,
-    Name: "Ford",
-    type: "Tempo Travel",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    Fare: "$25",
-    TotalFare: "$1200",
-    image: "./7.png",
-  },
-  {
-    id: 6,
-    Name: "Bus",
-    type: "Bus",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    Fare: "$25",
-    TotalFare: "$1200",
-    image: "./8.png",
-  },
-  {
-    id: 7,
-    Name: "Peugeot Citroen",
-    type: "Sedan",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    Fare: "$25",
-    TotalFare: "$1200",
-    image: "./10.png",
-  },
-  {
-    id: 8,
-    Name: "Peugeot Citroen",
-    type: "Sedan",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    Fare: "$25",
-    TotalFare: "$1200",
-    image: "./3.png",
-  },
-  {
-    id: 9,
-    Name: "Peugeot Citroen",
-    type: "Mini",
-    seats: "5",
-    ac: "AC",
-    luggage: "2",
-    start: "Automatic",
-    fare: "$25",
-    totalFare: "$1200",
-    image: "./6.png",
-  },
-];
+import Skeleton from '@mui/material/Skeleton';
 
 // const categories = [
 //   {
@@ -155,23 +45,27 @@ const SearchSidebar = () => {
 
   const [showCategory, setShowCategory] = useState(false);
   const [distance, setDistance] = useState();
+  const [loading , setLoading] = useState(true);
   const [active, setActive] = useState(true);
   const [val, setVal] = useState(subtrip ? subtrip : '8HRS/80KM');
   const [tarrifs, setTarrifs] = useState([]);
 
   const init = (sbt) => {
+    setLoading(true);
     axios({
       method:'GET',
       url:`${process.env.API}/tariff/get?start=${start}&trip=${trip}&subtrip=${sbt}`,
     }).then((res) => {
       let formatedData = [];
+      setLoading(false);
       res.data.forEach((data) => {
         formatedData.push({
-          _id:data._id,
+          id:data._id,
           Name:data?.category?.title,
           type:'None',
           seats: data?.category?.seats,
           gst:data?.gst,
+          per:data?.per_km,
           ac: data?.category?.ac ? "AC": "NON-AC",
           luggage: data?.category?.luggage,
           start: "Automatic",
@@ -183,6 +77,7 @@ const SearchSidebar = () => {
       setTarrifs(formatedData);
     }).catch((err) => {
       console.log(err);
+      setLoading(false);
     })
   }
   const handleClick = (e) => {
@@ -350,8 +245,21 @@ const SearchSidebar = () => {
           {showMenu()}
           <div className={styles.vehiclesGroup}>
             {tarrifs.map((car) => {
-              return <VehicalDetails key={car.id} {...car} />;
+              return <VehicalDetails key={car._id} {...car} />;
             })}
+            {
+              loading && tarrifs.length===0 &&
+              (
+                <>
+                <Skeleton variant="rectangular" sx={{marginTop:3}}  height={118} />
+                <Skeleton variant="rectangular" sx={{marginTop:3}}  height={118} />
+                </>
+              )
+            }
+            {
+              !loading && tarrifs.length===0 && 
+              <h1 style={{fontSize:30, fontWeight:'300',letterSpacing:5, textAlign:'center'}}>Service Unreachable</h1>
+            }
           </div>
         </div>
       </div>
