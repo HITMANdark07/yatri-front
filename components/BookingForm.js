@@ -20,7 +20,7 @@ const BookingForm = ({val}) => {
     const getLocs = () => {
       axios({
         method:'GET',
-        url:`${process.env.API}/location/list`
+        url:`${process.env.API}/location/list?status=true`
       }).then((res) => {
         setLocations(res.data);
         setValues((state) => ({
@@ -309,7 +309,7 @@ const BookingForm = ({val}) => {
                     </select>
                   </div>
                 </li>
-                <li>
+                {/* <li>
                   <label className={styles.label} htmlFor="start">
                     Pick Up Address
                   </label>
@@ -328,7 +328,7 @@ const BookingForm = ({val}) => {
                       }
                     </select>
                   </div>
-                </li>
+                </li> */}
                 <li>
                   <label className={styles.label} htmlFor="date">
                     Pick Up

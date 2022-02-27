@@ -11,7 +11,6 @@ const BookCab = () => {
   const router = useRouter();
   const destination = router.query.destination;
   const tariffId = router.query.tariff;
-  console.log(tariffId, destination);
   const [loading, setLoading] = useState(true);
   const [distance, setDistance] = useState("");
   const [gst,setGst] = useState(0);

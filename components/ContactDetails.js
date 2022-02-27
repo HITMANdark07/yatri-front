@@ -1,26 +1,96 @@
 import React from 'react';
+import { useState } from 'react';
 import styles from "../styles/BookCab.module.css";
+import Autocomplete from "react-google-autocomplete";
+import { useEffect } from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import makeToast from '../Toaster';
+import { useRouter } from 'next/router';
 
-const ContactDetails = () => {
+const ContactDetails = ({currentUser}) => {
+    const router = useRouter();
+    // console.log(router.query.tariff);
+    const [data, setData]  = useState({
+        tariff:router.query.tariff,
+        destination:router.query.destination,
+        client_name:"",
+        client_email:"",
+        pick_time:"",
+        pick_date:"",
+        client_request:"",
+        contact:"",
+        start:{
+            name:"",
+            lat:"",
+            lng:""
+        }
+    });
+    const { client_name, client_email, client_request, contact,pick_time,pick_date} = data;
+    const handleChange = (e) => {
+        let name = e.target.name;
+        let value = e.target.value;
+        setData((prevState) => ({
+            ...prevState,
+            [name]:value,
+            tariff:router.query.tariff,
+            destination:router.query.destination,
+            pick_time:router.query.time,
+            pick_date:new Date(router.query.date)
+        }))
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(data);
+        if(currentUser){
+            axios({
+                method:'POST',
+                url:`${process.env.API}/create/trip/${currentUser.user?._id}`,
+                headers:{
+                    Authorization:`Bearer ${currentUser.token}`
+                },
+                data:data
+            }).then((response) => {
+                console.log(response.data);
+                makeToast("success", "Booking Success");
+                setData((state) => ({
+                    ...state,
+                    client_email:"",
+                    client_name:"",
+                    client_request:"",
+                    contact:"",
+                }))
+            }).catch((err) => {
+                console.log(err.response.data.error);
+                makeToast("error",err.response.data.error);
+            })
+        }
+        
+    }
+    
     return (
         <div className={styles.reviewBox}>
             <div className={styles.titleTop}>
                 <h5>contact details</h5>
             </div>
             <div className={styles.guestDetail}>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
-                        <div className={styles.NameRow}>
-                            <div className={styles.firstName}>
-                                <label>first name</label>
+                        {/* <div className={styles.NameRow}>
+                            <div className={styles.firstName}> */}
+                                <label>Full Name</label>
                                 <input
                                     type="text"
+                                    name="client_name"
+                                    onChange={handleChange}
                                     id="firstName"
+                                    value={client_name}
                                     className={styles.formControl}
-                                    placeholder="First name"
+                                    placeholder="Full name"
+                                    required
                                 />
-                            </div>
-                            <div className={styles.lastName}>
+                            {/* </div> */}
+                            {/* <div className={styles.lastName}>
                                 <label>last name</label>
                                 <input
                                     type="text"
@@ -28,27 +98,59 @@ const ContactDetails = () => {
                                     className={styles.formControl}
                                     placeholder="Last name"
                                 />
-                            </div>
-                        </div>
+                            </div> */}
+                        {/* </div> */}
                     </div>
 
                     <div className={styles.formGroup}>
                         <label>Email address</label>
                         <input
                             type="email"
+                            name="client_email"
+                            onChange={handleChange}
+                            value={client_email}
                             className={styles.formControl}
                             placeholder="Enter email"
+                            required
                         />
                         <small id="emailHelp" className={styles.formText}>
                             Booking confirmation will be sent to this email ID.
                         </small>
                     </div>
+                
+                        <div className={styles.formGroup}>
+                            <label>Enter Pickup Location</label>
+                            <Autocomplete
+                            className={styles.formControl}
+                            options={{
+                                types:'address'
+                            }}
+                            apiKey="AIzaSyATzOQBhRyutho2AlgGTQnsybhNOkuACzI"
+                            onPlaceSelected={(place) => {
+                                setData((state) => ({
+                                    ...state,
+                                    start:{
+                                        name:place?.formatted_address,
+                                        lat:place?.geometry?.location?.lat(),
+                                        lng:place?.geometry?.location?.lng()
+                                    }
+                                }));
+                            }}
+                            />
+                            {/* <small id="emailHelp" className={styles.formText}>
+                                Booking confirmation will be sent to this email ID.
+                            </small> */}
+                        </div>
 
                     <div className={styles.formGroup}>
-                        <label>contact info</label>
+                        <label>contact Number</label>
                         <input
                             id="mobile-no"
+                            name="contact"
                             type="tel"
+                            value={contact}
+                            onChange={handleChange}
+                            placeholder='Mobile Number'
                             className={styles.formControl}
                         />
                     </div>
@@ -59,6 +161,9 @@ const ContactDetails = () => {
                         </label>
                         <textarea
                             className={styles.formControl}
+                            name="client_request"
+                            onChange={handleChange}
+                            value={client_request}
                             id="exampleFormControlTextarea1"
                             rows="3"
                             placeholder=""
@@ -75,7 +180,7 @@ const ContactDetails = () => {
                                 className={styles.promoControl}
                                 placeholder="Promo Code"
                             />
-                            <div className={styles.inputGroupPrepend}>
+                            <div style={{cursor:'pointer'}} className={styles.inputGroupPrepend}>
                                 <span className={styles.inputGroupText}>apply</span>
                             </div>
                         </div>
@@ -83,7 +188,7 @@ const ContactDetails = () => {
 
                     <div className={styles.submitBtn}>
                         <button
-                            type="button"
+                            type="submit"
                             className={styles.btn}
                         >
                             proceed to pay
@@ -94,5 +199,8 @@ const ContactDetails = () => {
         </div>
     )
 }
+const mapStateToProps = (state) => ({
+    currentUser : state.user.currentUser
+  });
 
-export default ContactDetails;
+export default connect(mapStateToProps)(ContactDetails);
