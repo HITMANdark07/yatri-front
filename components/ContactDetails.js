@@ -6,10 +6,12 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import makeToast from '../Toaster';
+import SignUpModal from './SignUpModal';
 import { useRouter } from 'next/router';
 
 const ContactDetails = ({currentUser}) => {
     const router = useRouter();
+    const [showModel, setShowModel] = useState(false);
     // console.log(router.query.tariff);
     const [data, setData]  = useState({
         tariff:router.query.tariff,
@@ -19,6 +21,7 @@ const ContactDetails = ({currentUser}) => {
         pick_time:"",
         pick_date:"",
         client_request:"",
+        car_type:"",
         contact:"",
         start:{
             name:"",
@@ -36,7 +39,8 @@ const ContactDetails = ({currentUser}) => {
             tariff:router.query.tariff,
             destination:router.query.destination,
             pick_time:router.query.time,
-            pick_date:new Date(router.query.date)
+            pick_date:new Date(router.query.date),
+            car_type:router.query.car_type
         }))
     }
     const handleSubmit = (e) => {
@@ -64,6 +68,8 @@ const ContactDetails = ({currentUser}) => {
                 console.log(err.response.data.error);
                 makeToast("error",err.response.data.error);
             })
+        }else{
+            setShowModel(true);
         }
         
     }
@@ -185,7 +191,7 @@ const ContactDetails = ({currentUser}) => {
                             </div>
                         </div>
                     </div>
-
+                    
                     <div className={styles.submitBtn}>
                         <button
                             type="submit"

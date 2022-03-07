@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { useRouter } from "next/router";
 import styles from '../styles/VehicalDetails.module.css';
 
-const VehicalDetails = ({id,per,Name,type,seats,ac,price,luggage,start,Fare,TotalFare,gst,image}) => {
+const VehicalDetails = ({id,per,Cat,Name,type,seats,ac,price,luggage,start,Fare,TotalFare,gst,image}) => {
   const [details, setDetails] = useState(false);
   const [description,setDescription] = useState("INCLUSION")
   const router = useRouter();
   const bookCab = (e) => {
     e.preventDefault();
     router.push(
-      `/book-cab/${router.asPath.replace(router.pathname,"")}&tariff=${id}`
+      `/book-cab/${router.asPath.replace(router.pathname,"")}&tariff=${id}&car_type=${Cat}`
     );
   };
   

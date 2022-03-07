@@ -61,6 +61,7 @@ const SearchSidebar = () => {
       res.data.forEach((data) => {
         formatedData.push({
           id:data._id,
+          Cat:data.category._id,
           Name:data?.category?.title,
           type:'None',
           seats: data?.category?.seats,
