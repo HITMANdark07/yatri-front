@@ -8,8 +8,9 @@ import { connect } from 'react-redux';
 import makeToast from '../Toaster';
 import SignUpModal from './SignUpModal';
 import { useRouter } from 'next/router';
+import { toggleShow } from '../redux/user/user.action';
 
-const ContactDetails = ({currentUser}) => {
+const ContactDetails = ({currentUser, toggle}) => {
     const router = useRouter();
     const [showModel, setShowModel] = useState(false);
     // console.log(router.query.tariff);
@@ -69,7 +70,7 @@ const ContactDetails = ({currentUser}) => {
                 makeToast("error",err.response.data.error);
             })
         }else{
-            setShowModel(true);
+            toggle();
         }
         
     }
@@ -208,5 +209,8 @@ const ContactDetails = ({currentUser}) => {
 const mapStateToProps = (state) => ({
     currentUser : state.user.currentUser
   });
+const mapDispatchToProps = (dispatch) => ({
+    toggle : () =>  dispatch(toggleShow())
+})
 
-export default connect(mapStateToProps)(ContactDetails);
+export default connect(mapStateToProps,mapDispatchToProps)(ContactDetails);

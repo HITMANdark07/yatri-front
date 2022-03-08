@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import styles from "../styles/Navbar.module.css";
-import { setCurrentUser } from "../redux/user/user.action";
+import { setCurrentUser, toggleShow } from "../redux/user/user.action";
 import { useRouter } from "next/router";
 import SignUpModal from "./SignUpModal";
 import makeToast from "../Toaster";
 
-const Navbar = ({currentUser, setUser}) => {
+const Navbar = ({currentUser, setUser, toggle, show}) => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [click, setClick] = useState(false);
@@ -48,7 +48,7 @@ const Navbar = ({currentUser, setUser}) => {
                 src="./bx-user-circle.svg"
                 onClick={() => {
                   if(currentUser===null){
-                    setModalOpen(true);
+                    toggle();
                   }
                 }}
               />
@@ -81,7 +81,7 @@ const Navbar = ({currentUser, setUser}) => {
             </div>
           </ul>
         </div>
-        {modalOpen && <SignUpModal setOpenModal={setModalOpen} />}
+        {show && <SignUpModal  />}
       </div>
 
       <div
@@ -103,9 +103,11 @@ const Navbar = ({currentUser, setUser}) => {
   );
 };
 const mapStateToProps = (state) => ({
-  currentUser : state.user.currentUser
+  currentUser : state.user.currentUser,
+  show: state.user.show
 });
 const mapDispatchToProps = (dispatch) => ({
-  setUser : user => dispatch(setCurrentUser(user))
+  setUser : user => dispatch(setCurrentUser(user)),
+  toggle : () =>  dispatch(toggleShow())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

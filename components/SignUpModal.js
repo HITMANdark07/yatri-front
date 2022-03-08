@@ -1,11 +1,12 @@
 import React,{ useState} from 'react';
 import { connect } from 'react-redux';
+import { toggleShow } from '../redux/user/user.action';
 import styles from '../styles/SignUpModal.module.css';
 import SignUpForm from './SignUpForm';
 
-const SignUpModal = ({setOpenModal}) => {
+const SignUpModal = ({toggle}) => {
   const handleClose = () => {
-    setOpenModal(false);
+    toggle();
   }
   const [type, setType] = useState("SignIn");
     return (
@@ -14,7 +15,7 @@ const SignUpModal = ({setOpenModal}) => {
           <div className={styles.titleCloseBtn}>
             <button
               onClick={() => {
-                setOpenModal(false);
+                toggle();
               }}
             >
               X
@@ -52,5 +53,8 @@ const SignUpModal = ({setOpenModal}) => {
 const mapStateToProps = (state) => ({
   currentUser : state.user.currentUser
 });
+const mapDispatchToProps = (dispatch) => ({
+  toggle : () =>  dispatch(toggleShow())
+})
 
-export default connect(mapStateToProps)(SignUpModal)
+export default connect(mapStateToProps,mapDispatchToProps)(SignUpModal)
